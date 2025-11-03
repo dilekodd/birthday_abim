@@ -20,7 +20,6 @@ function appendName(message) {
 	if (messageBox == null) return;
 
 	messageBox.innerHTML = `Doğum günün kutlu olsun ${message != null ? message : "abiciğim!"}`;
-	messageBox.innerHTML = `Doğum günün kutlu olsun abim}`;
 }
 
 function appendCandles(candlesCount) {
@@ -67,5 +66,4 @@ function putOutCandles() {
 	for (var i = 0; i < candles.length; i++) {
 		putOutCandle(document.getElementById(`candle_${i}`));
 	}
-}
 }
