@@ -1,76 +1,131 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <script src="birthday-cake.js"></script>
-        <link rel="stylesheet" type="text/css" media="all" href="birthday-cake.css"/>
-        <title>Birthday Cake</title>
-        <style>
-            /* fotoğraflar */
-            .photo {
-                position: absolute;
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
-                border-radius: 15px;
-                box-shadow: 0 0 8px rgba(0,0,0,0.3);
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <script src="birthday-cake.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      href="birthday-cake.css"
+    />
+    <title>Birthday Cake</title>
 
-            /* soldaki fotoğraflar */
-            #photo1 { left: 60px; top: 120px; }
-            #photo2 { left: 60px; top: 250px; }
-            #photo3 { left: 60px; top: 380px; }
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-            /* sağdaki fotoğraflar */
-            #photo4 { right: 60px; top: 120px; }
-            #photo5 { right: 60px; top: 250px; }
-            #photo6 { right: 60px; top: 380px; }
+      /* Fotoğraflar */
+      .photo {
+        position: absolute;
+        width: 15vw;
+        max-width: 100px;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      }
 
-            /* doğum günü mesajı */
-            #birthdayText {
-                position: absolute;
-                top: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 36px;
-                font-family: "Comic Sans MS", cursive, sans-serif;
-                color: #ffcc00;
-                text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-                animation: glow 1.5s ease-in-out infinite alternate;
-            }
+      /* soldaki üç fotoğraf */
+      #photo1 {
+        left: 5vw;
+        top: 20vh;
+      }
+      #photo2 {
+        left: 5vw;
+        top: 40vh;
+      }
+      #photo3 {
+        left: 5vw;
+        top: 60vh;
+      }
 
-            @keyframes glow {
-                from { text-shadow: 0 0 10px #ff6600, 0 0 20px #ff9900; }
-                to { text-shadow: 0 0 20px #ffcc00, 0 0 30px #ff6600; }
-            }
-        </style>
-    </head>
+      /* sağdaki üç fotoğraf */
+      #photo4 {
+        right: 5vw;
+        top: 20vh;
+      }
+      #photo5 {
+        right: 5vw;
+        top: 40vh;
+      }
+      #photo6 {
+        right: 5vw;
+        top: 60vh;
+      }
 
-    <body onload="init();">
-        <!-- Doğum günü yazısı -->
-        <div id="birthdayText">🎉 Doğum Günün Kutlu Olsun 🎉</div>
+      /* Doğum günü mesajı */
+      #birthdayText {
+        position: absolute;
+        top: 3vh;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: clamp(22px, 5vw, 36px);
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        color: #ffcc00;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        animation: glow 1.5s ease-in-out infinite alternate;
+        text-align: center;
+        z-index: 10;
+      }
 
-        <!-- Fotoğraflar -->
-        <img src="1.png" id="photo1" class="photo" alt="Foto 1">
-        <img src="2.png" id="photo2" class="photo" alt="Foto 2">
-        <img src="3.png" id="photo3" class="photo" alt="Foto 3">
-        <img src="4.png" id="photo4" class="photo" alt="Foto 4">
-        <img src="5.png" id="photo5" class="photo" alt="Foto 5">
-        <img src="6.png" id="photo6" class="photo" alt="Foto 6">
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #ff6600, 0 0 20px #ff9900;
+        }
+        to {
+          text-shadow: 0 0 20px #ffcc00, 0 0 30px #ff6600;
+        }
+      }
 
-        <!-- Orijinal pasta -->
-        <div class="cake" onClick="putOutCandles();">
-            <div class="icing">
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-            </div>
-            <div class="layer top"></div>
-            <div class="layer middle"></div>
-            <div class="layer bottom"></div>
-        </div>
+      /* Mobil uyum için ekstra düzen */
+      @media (max-width: 768px) {
+        .photo {
+          width: 20vw;
+          max-width: 80px;
+        }
+        #photo1,
+        #photo2,
+        #photo3 {
+          left: 2vw;
+        }
+        #photo4,
+        #photo5,
+        #photo6 {
+          right: 2vw;
+        }
+      }
+    </style>
+  </head>
 
-        <div id="message_container" class="message"></div>
-    </body>
+  <body onload="init();">
+    <!-- Doğum günü yazısı -->
+    <div id="birthdayText">🎉 Doğum Günün Kutlu Olsun 🎉</div>
+
+    <!-- Fotoğraflar -->
+    <img src="1.png" id="photo1" class="photo" alt="Foto 1" />
+    <img src="2.png" id="photo2" class="photo" alt="Foto 2" />
+    <img src="3.png" id="photo3" class="photo" alt="Foto 3" />
+    <img src="4.png" id="photo4" class="photo" alt="Foto 4" />
+    <img src="5.png" id="photo5" class="photo" alt="Foto 5" />
+    <img src="6.png" id="photo6" class="photo" alt="Foto 6" />
+
+    <!-- Orijinal pasta -->
+    <div class="cake" onClick="putOutCandles();">
+      <div class="icing">
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+      </div>
+      <div class="layer top"></div>
+      <div class="layer middle"></div>
+      <div class="layer bottom"></div>
+    </div>
+
+    <div id="message_container" class="message"></div>
+  </body>
 </html>
