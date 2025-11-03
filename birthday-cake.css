@@ -17,12 +17,12 @@ body {
 
 .cake {
 	position: absolute;
-	width: 600px;
-	height: 500px;
-	top: 50%;
+	width: 80vw;
+	max-width: 400px;
+	height: auto;
 	left: 50%;
-	margin-top: -250px;
-	margin-left: -300px;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .cake > * {
@@ -204,5 +204,11 @@ body {
 	text-align: center;
 	font-family: 'Leckerli One', cursive;
 	font-size: 40;
-	color: #f0e4d0;
+	color: #fffbe6;
+	text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+	font-size: clamp(20px, 4vw, 32px);
+}
+
+.photo {
+	width: clamp(60px, 15vw, 100px);
 }
