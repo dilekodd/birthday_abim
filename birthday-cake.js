@@ -1,7 +1,7 @@
 function init() {
     const url = new URL(window.location.href);
 
-    // İsim ilk ayarlanmalı, diğer mesajlar ismin altına eklenmeli
+    // İsim ve diğer mesajları sırayla yerleştir
     appendName(url.searchParams.get("name"));
     appendMessages(url.searchParams.getAll("message"));
     
@@ -37,8 +37,6 @@ function appendCandles(candlesCount) {
         return;
     }
 
-    // Pastanın CSS'i düzeltildiği için buradaki pozisyon ayarları kaldırıldı
-
     let candleHalfCount = 1;
     for (let i = 0; i < candlesCount; i++) {
         // Mum sayısına göre pozisyon hesaplaması için sabitler
@@ -51,17 +49,15 @@ function appendCandles(candlesCount) {
         // Soldan başlangıç noktası + (boşluk + mum genişliği) * sıra numarası
         const candleXPosition = spacing + (spacing + CANDLE_WIDTH) * i; 
 
-        // Mumun Y pozisyonu (pastanın üstü)
-        const candleYPosition = 80; // Pastanın krema katmanına göre dikey konum
+        // DÜZELTME: Mumun Y pozisyonu (top değeri)
+        // Mumlar artık kremanın tam üstüne oturacak.
+        const candleYPosition = 0; 
 
-        // Mumun pozisyonu pastanın içindeki konumuna göre ayarlandı
         const candleHTML = `
             <div id="candle_${i}" class="candle" 
                  style="position:absolute;
-                        /* LEFT: Pastanın soldan başlangıcına göre X pozisyonu */
                         left:${candleXPosition}px;
-                        /* TOP: Pastanın en üstüne göre Y pozisyonu */
-                        top:${candleYPosition}px;">
+                        top:${candleYPosition}px;"> 
             </div>`;
 
         // Mumları pastanın içine ekle
