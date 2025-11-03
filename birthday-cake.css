@@ -18,12 +18,11 @@ body {
 .cake {
 	position: absolute;
 	width: 80vw;
-	max-width: 400px; /* Pastanın maksimum genişliği */
+	max-width: 400px;
 	height: auto;
 	left: 50%;
 	top: 50%;
-	/* Eski marjinler kaldırıldı, ortalama için transform kullanıldı */
-	transform: translate(-50%, -50%); 
+	transform: translate(-50%, -50%); /* Tam ortalama */
 }
 
 .cake > * {
@@ -43,7 +42,7 @@ body {
 	margin-top: -100px;
 	height: 200px;
 	background: #553c13;
-	z-index: 0;
+	z-index: 0; /* Pasta katmanları en altta */
 }
 
 .bottom {
@@ -68,7 +67,7 @@ body {
 	margin-top: 0px;
 	height: 100px;
 	background: #f0e4d0;
-	z-index: 4;
+	z-index: 4; /* Krema, katmanların üstünde */
 }
 
 .drip {
@@ -76,12 +75,13 @@ body {
 	border-bottom-right-radius: 50%;
 	background-color: #f0e4d0;
 	border-bottom: solid 1px #000000;
-	z-index: 5;
-	position: absolute; /* Damlaların birbirine göre konumlanması için */
+	z-index: 5; /* Damlalar kremanın üstünde */
+	position: absolute; 
 }
 
+/* KREMA DAMLALARI DÜZELTİLDİ */
 .drip:nth-child(1) {
-	width: 10%; /* ~40px */
+	width: 40px; 
 	height: 50px;
 	margin-top: 35px;
 	margin-left: -1px;
@@ -91,31 +91,31 @@ body {
 }
 
 .drip:nth-child(2) {
-	width: 45%; /* ~180px */
+	width: 140px; 
 	height: 100px;
 	margin-top: -60px;
-	margin-left: 10%; /* Yüzdelik başlangıç noktası */
+	margin-left: 40px;
 }
 
 .drip:nth-child(3) {
-	width: 50%; /* ~200px */
+	width: 150px; 
 	height: 100px;
 	margin-top: -60px;
-	margin-left: 50%; /* Yüzdelik başlangıç noktası */
+	margin-left: 180px; 
 }
 
 .drip:nth-child(4) {
-	width: 40%; /* ~160px */
+	width: 100px; 
 	height: 100px;
 	margin-top: -130px;
-	margin-left: 70%; /* Yüzdelik başlangıç noktası */
+	margin-left: 330px; 
 }
 
 .drip:nth-child(5) {
-	width: 10%; /* ~40px */
+	width: 40px; 
 	height: 50px;
 	margin-top: -90px;
-	margin-left: 90%; /* Yüzdelik başlangıç noktası */
+	margin-left: calc(100% - 40px); /* Sağ kenara sabitlendi */
 	border-left: solid 1px #000000;
 	border-right: solid 1px #000000;
 	transform: skewY(-20deg);
@@ -125,12 +125,10 @@ body {
 	position: absolute;
 	width: 18px;
 	height: 100px;
-	/* Eski konumlandırma ayarları kaldırıldı, JS konumlandıracak */
 	background: #ffffff;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	z-index: 5;
-
+	z-index: 6; /* Mumlar en üstte */
 }
 
 .candle:after,
@@ -198,7 +196,7 @@ body {
 	width: 100%; 
 	top: 50%;
 	left: 50%;
-	margin-top: calc(250px + 20vh); /* Pastanın altından daha aşağıda konumlandır */
+	margin-top: calc(250px + 20vh); 
 	margin-left: 0;
 	transform: translateX(-50%); 
 	text-align: center;
@@ -207,4 +205,3 @@ body {
 	text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 	font-size: clamp(20px, 4vw, 32px);
 }
-/* Alttaki gereksiz tekrar eden stil bloğu silindi */
