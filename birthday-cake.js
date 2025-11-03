@@ -1,80 +1,69 @@
 function init() {
-    const url = new URL(window.location.href);
+	var url = new URL(window.location.href);
 
-    // Düzgün sıralama: Önce isim, sonra diğer mesajlar, en son mumlar
-    appendName(url.searchParams.get("name"));
-    appendMessages(url.searchParams.getAll("message"));
-    appendCandles(url.searchParams.get("candles"));
+	appendCandles(url.searchParams.get("candles"));
+	appendName(url.searchParams.get("name"));
+	appendMessages(url.searchParams.getAll("message"));
 }
 
 function appendMessages(messages) {
-    if (!Array.isArray(messages) || messages.length === 0) return;
-
-    const messageBox = document.getElementById("message_container");
-    if (!messageBox) return;
-
-    // DÜZELTME: Mesajları üzerine yazmak yerine, ismin/ana mesajın altına ekle
-    messageBox.innerHTML += `<br/>${messages.join("<br />")}`;
+	if (!Array.isArray(messages) || messages.length == 0) return;
+	
+	let messageBox = document.getElementById("message_container");
+	if (messageBox == null || messageBox == 'undefined') return;
+	
+	messageBox.innerHTML = `${messages.join("<br />")}`;
 }
 
-function appendName(name) {
-    const messageBox = document.getElementById("message_container");
-    if (!messageBox) return;
+function appendName(message) {
+	let messageBox = document.getElementById("message_container");
+	if (messageBox == null) return;
 
-    // DÜZELTME: Hatalı ve üzerine yazan satırlar silindi
-    // name parametresi varsa kullan, yoksa "abiciğim!" yaz
-    messageBox.innerHTML = `Doğum günün kutlu olsun ${name ? name : "abiciğim!"} 🎂`;
+	messageBox.innerHTML = `Happy Birthday ${message != null ? message : "to you!"}`;
 }
 
 function appendCandles(candlesCount) {
-    if (!candlesCount) candlesCount = 9;
-    else candlesCount = parseInt(candlesCount);
+	if (candlesCount == null) candlesCount = 9;
+	
+	let candleHalfCount = 1;
+	for (var i = 0; i < candlesCount; i++) {
+		if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
+		else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
 
-    // Kullanıcının orijinal JS'teki karmaşık konumlandırma mantığı korunuyor
-    let candleHalfCount = 1;
-    for (let i = 0; i < candlesCount; i++) {
-        if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
-        else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
+		let candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
+		let candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
+		let candleYPosition = -1 * Math.floor(Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) + (320 - candleXPositionOffset));
 
-        let candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
-        let candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
-        // Orijinal Y pozisyonu hesaplaması (rastgele ve offsetli) korunuyor
-        let candleYPosition = -1 * Math.floor(Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) + (320 - candleXPositionOffset));
+		document.body.innerHTML += `<div id="candle_${i}" class="candle" style="margin-left:${candleXPosition}px; margin-top:${candleYPosition}px;"></div>`;
+		
+		let candle = document.getElementById(`candle_${i}`);
+		candle.setAttribute("onClick", `putOutCandle("candle_${i}");`);
 
-        // Mumlar, orijinal kodun yaptığı gibi doğrudan BODY'ye ekleniyor
-        // ve CSS'teki (margin-left/margin-top) değerler kullanılıyor.
-        document.body.innerHTML += `<div id="candle_${i}" class="candle" style="margin-left:${candleXPosition}px; margin-top:${candleYPosition}px;"></div>`;
-
-        let candle = document.getElementById(`candle_${i}`);
-        // DÜZELTME: onClick atama yöntemi modern ve güvenilir hale getirildi
-        candle.onclick = () => putOutCandle(`candle_${i}`);
-
-        for (let j = 0; j < 5; j++) {
-            candle.innerHTML += `<div class="flame"></div>`;
-        }
-    }
+		for (var j = 0; j < 5; j++) {
+			candle.innerHTML += `<div class="flame"></div>`;
+		}
+	}
 }
 
 function putOutCandle(candle_name) {
-    if (!candle_name) return;
+	if (candle_name == null) return;
 
-    let candle = document.getElementById(candle_name);
-    if (!candle) return;
+	let candle = document.getElementById(candle_name);
 
-    // DÜZELTME: Mum söndürme mantığı düzeltildi (tüm alevleri kaldırır)
-    candle.querySelectorAll(".flame").forEach(flame => flame.remove());
+	for (var i = 0; i < 5; i++) {
+		var flame = candle.querySelector(`.flame`);
+		
+		if (flame != null) {
+			flame.remove();
+		}
+	}
 }
 
 function putOutCandles() {
-    let candles = document.getElementsByClassName("candle");
-    if (!candles || candles.length === 0) return;
-
-    // DÜZELTME: Mumları söndürmek için her mumu tek tek çağırır
-    for (let i = 0; i < candles.length; i++) {
-        // ID ile çağırıldı, böylece `putOutCandle` doğru çalışır
-        putOutCandle(`candle_${i}`); 
-    }
+	let candles = document.getElementsByClassName("candle");
+	if (candles == null || candles == 'undefined') return;
+	
+	for (var i = 0; i < candles.length; i++) {
+		putOutCandle(document.getElementById(`candle_${i}`));
+	}
 }
-
-// Sayfa yüklendiğinde otomatik başlat
-window.onload = init;
