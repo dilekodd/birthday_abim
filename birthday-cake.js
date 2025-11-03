@@ -5,7 +5,6 @@ function init() {
   appendMessages(url.searchParams.getAll("message"));
 }
 
-// 🎂 Mesaj kutusu
 function appendMessages(messages) {
   if (!Array.isArray(messages) || messages.length === 0) return;
 
@@ -15,52 +14,65 @@ function appendMessages(messages) {
   messageBox.innerHTML = `${messages.join("<br />")}`;
 }
 
-// 🎉 Doğum günü mesajı
 function appendName(message) {
-  const box = document.getElementById("message_container");
-  if (!box) return;
+  const messageBox = document.getElementById("message_container");
+  if (!messageBox) return;
 
-  box.innerHTML = `Doğum günün kutlu olsun ${message ?? "abiciğim 🎉"}`;
+  messageBox.innerHTML = `Doğum günün kutlu olsun ${message ?? "abiciğim 🎉"}`;
 }
 
-// 🕯️ Mumları pastaya ekler
 function appendCandles(candlesCount) {
-  if (candlesCount == null || isNaN(candlesCount)) candlesCount = 7;
+  if (!candlesCount || isNaN(candlesCount)) candlesCount = 9;
 
   const cake = document.querySelector(".cake");
   if (!cake) return;
 
-  // Önce varsa eski mumları temizle
-  document.querySelectorAll(".candle").forEach(c => c.remove());
+  // mevcut mumları temizle
+  cake.querySelectorAll(".candle").forEach(c => c.remove());
+
+  let candleHalfCount = 1;
 
   for (let i = 0; i < candlesCount; i++) {
-    const x = 40 + i * (320 / candlesCount);
-    const candle = document.createElement("div");
-    candle.className = "candle";
-    candle.style.left = `${x}px`;
-    candle.onclick = () => putOutCandle(candle);
+    if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
+    else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
 
-    for (let j = 0; j < 3; j++) {
+    const candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
+    const candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
+    const candleYPosition = -1 * Math.floor(
+      Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) +
+      (320 - candleXPositionOffset)
+    );
+
+    // mum oluştur
+    const candle = document.createElement("div");
+    candle.id = `candle_${i}`;
+    candle.className = "candle";
+    candle.style.marginLeft = `${candleXPosition}px`;
+    candle.style.marginTop = `${candleYPosition}px`;
+    candle.onclick = () => putOutCandle(`candle_${i}`);
+
+    // alevleri ekle
+    for (let j = 0; j < 5; j++) {
       const flame = document.createElement("div");
       flame.className = "flame";
       candle.appendChild(flame);
     }
 
-    cake.appendChild(candle);
+    cake.appendChild(candle); // 🎂 sadece pastaya ekle
   }
 }
 
-// 🔥 Tek mum söndürme
-function putOutCandle(candle) {
+function putOutCandle(candle_name) {
+  if (!candle_name) return;
+
+  const candle = document.getElementById(candle_name);
   if (!candle) return;
-  const flames = candle.querySelectorAll(".flame");
-  flames.forEach(f => f.remove());
+
+  candle.querySelectorAll(".flame").forEach(f => f.remove());
 }
 
-// 💨 Tüm mumları söndürme
 function putOutCandles() {
-  document.querySelectorAll(".candle").forEach(c => putOutCandle(c));
+  document.querySelectorAll(".candle").forEach(c => putOutCandle(c.id));
 }
 
-// 🔔 Sayfa yüklenince başlat
 window.onload = init;
