@@ -16,18 +16,16 @@ body {
 }
 
 .cake {
-	position: absolute;
-	width: 600px;
-	height: 500px;
-	top: 50%;
+	position: absolute; /* Mutlak konumlandırma */
 	width: 80vw;
 	max-width: 400px;
 	height: auto;
-	left: 50%;
-	margin-top: -250px;
-	margin-left: -300px;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	left: 50%; /* Yatayda ortala */
+	top: 50%; /* Dikeyde ortala */
+	/* Gereksiz marjinleri KALIYORUZ */
+	/* margin-top: -250px; */
+	/* margin-left: -300px; */
+	transform: translate(-50%, -50%); /* Kendi boyutunun yarısı kadar geri kaydırarak tam ortala */
 }
 
 .cake > * {
@@ -128,15 +126,18 @@ body {
 	position: absolute;
 	width: 18px;
 	height: 100px;
-	top: 50%;
-	left: 50%;
-	margin-top: -325px;
-	margin-left: -10px;
+	/* Pastanın içinde, pastanın üst kısmına göre konumlanacağı için 
+	   gerekli olan ayarları JAVASCRIPT'te yapacağız. 
+	   Buradaki TOP, LEFT, MARGIN-TOP ayarlarını kaldırıyoruz veya düzenliyoruz. */
+	/* top: 50%; */
+	/* left: 50%; */
+	/* margin-top: -325px; */ 
+	/* margin-left: -10px; */
+	/* Mumun pozisyonunu JavaScript'e bırakıyoruz */
 	background: #ffffff;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	z-index: 5;
-
 }
 
 .candle:after,
@@ -201,21 +202,18 @@ body {
 
 .message {
 	position: absolute;
-	width: 600px;
+	width: 100%; /* Sayfanın tüm genişliğini kaplasın */
 	top: 50%;
 	left: 50%;
-	margin-top: 250px;
-	margin-left: -300px;
+	margin-top: calc(250px + 20vh); /* Pastanın altından daha aşağıda konumlandır */
+	margin-left: 0; /* Ortalamak için kaldırıyoruz */
+	transform: translateX(-50%); /* Yatayda ortala */
 	text-align: center;
 	font-family: 'Leckerli One', cursive;
-	font-size: 40;
-	color: #f0e4d0;
-}
 	color: #fffbe6;
 	text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 	font-size: clamp(20px, 4vw, 32px);
 }
-
 .photo {
 	width: clamp(60px, 15vw, 100px);
 }
