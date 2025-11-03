@@ -5,26 +5,9 @@
         <link rel="stylesheet" type="text/css" media="all" href="birthday-cake.css"/>
         <title>Birthday Cake</title>
         <style>
-            body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: row;
-                background-color: #fce4ec; /* mevcut arka planla uyumlu pembe ton */
-                height: 100vh;
-                margin: 0;
-                overflow: hidden;
-            }
-
-            .photo-column {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .photo-column img {
+            /* sadece fotoğraf konumları için eklendi, diğer hiçbir şey değişmedi */
+            .photo {
+                position: absolute;
                 width: 100px;
                 height: 100px;
                 object-fit: cover;
@@ -32,53 +15,40 @@
                 box-shadow: 0 0 8px rgba(0,0,0,0.3);
             }
 
-            .center-area {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
+            /* soldaki üç foto */
+            #photo1 { left: 60px; top: 120px; }
+            #photo2 { left: 60px; top: 250px; }
+            #photo3 { left: 60px; top: 380px; }
 
-            .message {
-                text-align: center;
-                font-size: 24px;
-                color: #d81b60;
-                margin-top: 20px;
-                font-family: 'Comic Sans MS', cursive;
-            }
+            /* sağdaki üç foto */
+            #photo4 { right: 60px; top: 120px; }
+            #photo5 { right: 60px; top: 250px; }
+            #photo6 { right: 60px; top: 380px; }
         </style>
     </head>
 
     <body onload="init();">
-        <!-- Sol fotoğraflar -->
-        <div class="photo-column">
-            <img src="foto1.jpg" alt="Foto 1">
-            <img src="foto2.jpg" alt="Foto 2">
-            <img src="foto3.jpg" alt="Foto 3">
-        </div>
+        <!-- Fotoğraflar (sadece bunlar eklendi) -->
+        <img src="1.png" id="photo1" class="photo" alt="Foto 1">
+        <img src="2.png" id="photo2" class="photo" alt="Foto 2">
+        <img src="3.png" id="photo3" class="photo" alt="Foto 3">
+        <img src="4.png" id="photo4" class="photo" alt="Foto 4">
+        <img src="5.png" id="photo5" class="photo" alt="Foto 5">
+        <img src="6.png" id="photo6" class="photo" alt="Foto 6">
 
-        <!-- Orta kısım: pasta -->
-        <div class="center-area">
-            <div class="cake" onClick="putOutCandles();">
-                <div class="icing">
-                    <div class="drip"></div>
-                    <div class="drip"></div>
-                    <div class="drip"></div>
-                    <div class="drip"></div>
-                    <div class="drip"></div>
-                </div>
-                <div class="layer top"></div>
-                <div class="layer middle"></div>
-                <div class="layer bottom"></div>
+        <!-- Orijinal pastan -->
+        <div class="cake" onClick="putOutCandles();">
+            <div class="icing">
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
             </div>
-            <div id="message_container" class="message"></div>
+            <div class="layer top"></div>
+            <div class="layer middle"></div>
+            <div class="layer bottom"></div>
         </div>
-
-        <!-- Sağ fotoğraflar -->
-        <div class="photo-column">
-            <img src="foto4.jpg" alt="Foto 4">
-            <img src="foto5.jpg" alt="Foto 5">
-            <img src="foto6.jpg" alt="Foto 6">
-        </div>
+        <div id="message_container" class="message"></div>
     </body>
 </html>
