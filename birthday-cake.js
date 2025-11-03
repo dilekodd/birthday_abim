@@ -1,8 +1,12 @@
+/* birthday-cake.js */
+
 function init() {
     const url = new URL(window.location.href);
 
-    appendCandles(url.searchParams.get("candles"));
     appendName(url.searchParams.get("name"));
+    // Mumları en son ekle
+    appendCandles(url.searchParams.get("candles"));
+    // Mesajları isimden SONRA ekle
     appendMessages(url.searchParams.getAll("message"));
 }
 
@@ -11,14 +15,16 @@ function appendMessages(messages) {
 
     const messageBox = document.getElementById("message_container");
     if (!messageBox) return;
-
-    messageBox.innerHTML = messages.join("<br />");
+    
+    // Var olan doğum günü mesajını koru ve altına mesajları ekle
+    messageBox.innerHTML += `<br/>${messages.join("<br />")}`;
 }
 
 function appendName(name) {
     const messageBox = document.getElementById("message_container");
     if (!messageBox) return;
-
+    
+    // Doğum günü mesajını ayarla
     messageBox.innerHTML = `Doğum günün kutlu olsun ${name ? name : "abiciğim!"} 🎂`;
 }
 
@@ -32,29 +38,42 @@ function appendCandles(candlesCount) {
         return;
     }
 
-    // Pasta konumunu sabitle
+    // CSS'te konumlandırmayı yaptığımız için bu satırları KALDIRIYORUZ:
+    /*
     cake.style.position = "relative";
     cake.style.display = "block";
     cake.style.margin = "0 auto";
+    */
 
     let candleHalfCount = 1;
     for (let i = 0; i < candlesCount; i++) {
-        if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
-        else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
+        // ... (mumların pozisyon hesaplama mantığı aynı kalabilir) ...
+        
+        // Pasta 400px genişliğinde varsayıldığı için düzeltilmiş X pozisyonu
+        const CAKE_WIDTH = 400; // max-width değeri
+        const CANDLE_WIDTH = 18;
+        const spacing = (CAKE_WIDTH - (candlesCount * CANDLE_WIDTH)) / (candlesCount + 1);
+        
+        // Soldan başlangıç noktası + (boşluk + mum genişliği) * sıra numarası
+        const candleXPosition = spacing + (spacing + CANDLE_WIDTH) * i; 
 
-        const candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
-        const candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
-        const candleYPosition = -1 * Math.floor(Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) + (320 - candleXPositionOffset));
+        // Mumun Y pozisyonu (pastanın üstü varsayılan olarak)
+        // Pastanın üst katmanı 200px yüksekliğinde, kreması 100px. 
+        // Mumun başlangıç noktası için bir offset belirliyoruz.
+        const yOffset = 100; // Pastanın üst katmanı ile mum arasına bir boşluk
+        const candleYPosition = yOffset - 110; // 110 mum yüksekliği + boşluk
 
         // Mumun pozisyonu artık pastanın üstüne göre olacak
         const candleHTML = `
             <div id="candle_${i}" class="candle" 
                  style="position:absolute;
-                        left:calc(50% + ${candleXPosition}px);
-                        top:${candleYPosition}px;
-                        transform:translateX(-50%);">
+                        /* LEFT: Yatayda X pozisyonu + Mumun kendi genişliğinin yarısı kadar geri */
+                        left:${candleXPosition}px;
+                        /* TOP: Dikey pozisyon */
+                        top:${candleYPosition}px;">
             </div>`;
 
+        // Mumları pastanın içine ekle
         cake.insertAdjacentHTML("beforeend", candleHTML);
 
         const candle = document.getElementById(`candle_${i}`);
