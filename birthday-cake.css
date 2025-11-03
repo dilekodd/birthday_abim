@@ -16,16 +16,14 @@ body {
 }
 
 .cake {
-	position: absolute; /* Mutlak konumlandırma */
+	position: absolute;
 	width: 80vw;
-	max-width: 400px;
+	max-width: 400px; /* Pastanın maksimum genişliği */
 	height: auto;
-	left: 50%; /* Yatayda ortala */
-	top: 50%; /* Dikeyde ortala */
-	/* Gereksiz marjinleri KALIYORUZ */
-	/* margin-top: -250px; */
-	/* margin-left: -300px; */
-	transform: translate(-50%, -50%); /* Kendi boyutunun yarısı kadar geri kaydırarak tam ortala */
+	left: 50%;
+	top: 50%;
+	/* Eski marjinler kaldırıldı, ortalama için transform kullanıldı */
+	transform: translate(-50%, -50%); 
 }
 
 .cake > * {
@@ -79,10 +77,11 @@ body {
 	background-color: #f0e4d0;
 	border-bottom: solid 1px #000000;
 	z-index: 5;
+	position: absolute; /* Damlaların birbirine göre konumlanması için */
 }
 
 .drip:nth-child(1) {
-	width: 40px;
+	width: 10%; /* ~40px */
 	height: 50px;
 	margin-top: 35px;
 	margin-left: -1px;
@@ -92,31 +91,31 @@ body {
 }
 
 .drip:nth-child(2) {
-	width: 175px;
+	width: 45%; /* ~180px */
 	height: 100px;
 	margin-top: -60px;
-	margin-left: 40px;
+	margin-left: 10%; /* Yüzdelik başlangıç noktası */
 }
 
 .drip:nth-child(3) {
-	width: 200px;
+	width: 50%; /* ~200px */
 	height: 100px;
 	margin-top: -60px;
-	margin-left: 200px;
+	margin-left: 50%; /* Yüzdelik başlangıç noktası */
 }
 
 .drip:nth-child(4) {
-	width: 175px;
+	width: 40%; /* ~160px */
 	height: 100px;
 	margin-top: -130px;
-	margin-left: 395px;
+	margin-left: 70%; /* Yüzdelik başlangıç noktası */
 }
 
 .drip:nth-child(5) {
-	width: 40px;
+	width: 10%; /* ~40px */
 	height: 50px;
 	margin-top: -90px;
-	margin-left: 559px;
+	margin-left: 90%; /* Yüzdelik başlangıç noktası */
 	border-left: solid 1px #000000;
 	border-right: solid 1px #000000;
 	transform: skewY(-20deg);
@@ -126,18 +125,12 @@ body {
 	position: absolute;
 	width: 18px;
 	height: 100px;
-	/* Pastanın içinde, pastanın üst kısmına göre konumlanacağı için 
-	   gerekli olan ayarları JAVASCRIPT'te yapacağız. 
-	   Buradaki TOP, LEFT, MARGIN-TOP ayarlarını kaldırıyoruz veya düzenliyoruz. */
-	/* top: 50%; */
-	/* left: 50%; */
-	/* margin-top: -325px; */ 
-	/* margin-left: -10px; */
-	/* Mumun pozisyonunu JavaScript'e bırakıyoruz */
+	/* Eski konumlandırma ayarları kaldırıldı, JS konumlandıracak */
 	background: #ffffff;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	z-index: 5;
+
 }
 
 .candle:after,
@@ -202,18 +195,16 @@ body {
 
 .message {
 	position: absolute;
-	width: 100%; /* Sayfanın tüm genişliğini kaplasın */
+	width: 100%; 
 	top: 50%;
 	left: 50%;
 	margin-top: calc(250px + 20vh); /* Pastanın altından daha aşağıda konumlandır */
-	margin-left: 0; /* Ortalamak için kaldırıyoruz */
-	transform: translateX(-50%); /* Yatayda ortala */
+	margin-left: 0;
+	transform: translateX(-50%); 
 	text-align: center;
 	font-family: 'Leckerli One', cursive;
 	color: #fffbe6;
 	text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 	font-size: clamp(20px, 4vw, 32px);
 }
-.photo {
-	width: clamp(60px, 15vw, 100px);
-}
+/* Alttaki gereksiz tekrar eden stil bloğu silindi */
