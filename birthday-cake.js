@@ -1,69 +1,88 @@
 function init() {
-	var url = new URL(window.location.href);
+    const url = new URL(window.location.href);
 
-	appendCandles(url.searchParams.get("candles"));
-	appendName(url.searchParams.get("name"));
-	appendMessages(url.searchParams.getAll("message"));
+    appendCandles(url.searchParams.get("candles"));
+    appendName(url.searchParams.get("name"));
+    appendMessages(url.searchParams.getAll("message"));
 }
 
 function appendMessages(messages) {
-	if (!Array.isArray(messages) || messages.length == 0) return;
+    if (!Array.isArray(messages) || messages.length === 0) return;
 
-	let messageBox = document.getElementById("message_container");
-	if (messageBox == null || messageBox == 'undefined') return;
+    const messageBox = document.getElementById("message_container");
+    if (!messageBox) return;
 
-	messageBox.innerHTML = `${messages.join("<br />")}`;
+    messageBox.innerHTML = messages.join("<br />");
 }
 
-function appendName(message) {
-	let messageBox = document.getElementById("message_container");
-	if (messageBox == null) return;
+function appendName(name) {
+    const messageBox = document.getElementById("message_container");
+    if (!messageBox) return;
 
-	messageBox.innerHTML = `Doğum günün kutlu olsun ${message != null ? message : "abiciğim!"}`;
-  }
+    messageBox.innerHTML = `Doğum günün kutlu olsun ${name ? name : "abiciğim!"} 🎂`;
+}
 
 function appendCandles(candlesCount) {
-	if (candlesCount == null) candlesCount = 9;
+    if (!candlesCount) candlesCount = 9;
+    else candlesCount = parseInt(candlesCount);
 
-	let candleHalfCount = 1;
-	for (var i = 0; i < candlesCount; i++) {
-		if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
-		else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
+    const cake = document.querySelector(".cake");
+    if (!cake) {
+        console.error("Hata: .cake elementi bulunamadı!");
+        return;
+    }
 
-		let candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
-		let candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
-		let candleYPosition = -1 * Math.floor(Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) + (320 - candleXPositionOffset));
+    // Pasta konumunu sabitle
+    cake.style.position = "relative";
+    cake.style.display = "block";
+    cake.style.margin = "0 auto";
 
-		document.body.innerHTML += `<div id="candle_${i}" class="candle" style="margin-left:${candleXPosition}px; margin-top:${candleYPosition}px;"></div>`;
+    let candleHalfCount = 1;
+    for (let i = 0; i < candlesCount; i++) {
+        if ((i + 1) < (candlesCount / 2)) candleHalfCount++;
+        else if ((i + 1) > (candlesCount / 2)) candleHalfCount--;
 
-		let candle = document.getElementById(`candle_${i}`);
-		candle.setAttribute("onClick", `putOutCandle("candle_${i}");`);
+        const candleXPositionOffset = candleHalfCount * (20 / (candlesCount / 2));
+        const candleXPosition = ((-310 + (600 / candlesCount) / 2) + ((600 / candlesCount) * i));
+        const candleYPosition = -1 * Math.floor(Math.random() * ((325 + candleXPositionOffset) - (320 - candleXPositionOffset) + 1) + (320 - candleXPositionOffset));
 
-		for (var j = 0; j < 5; j++) {
-			candle.innerHTML += `<div class="flame"></div>`;
-		}
-	}
+        // Mumun pozisyonu artık pastanın üstüne göre olacak
+        const candleHTML = `
+            <div id="candle_${i}" class="candle" 
+                 style="position:absolute;
+                        left:calc(50% + ${candleXPosition}px);
+                        top:${candleYPosition}px;
+                        transform:translateX(-50%);">
+            </div>`;
+
+        cake.insertAdjacentHTML("beforeend", candleHTML);
+
+        const candle = document.getElementById(`candle_${i}`);
+        candle.onclick = () => putOutCandle(`candle_${i}`);
+
+        for (let j = 0; j < 5; j++) {
+            candle.innerHTML += `<div class="flame"></div>`;
+        }
+    }
 }
 
 function putOutCandle(candle_name) {
-	if (candle_name == null) return;
+    if (!candle_name) return;
 
-	let candle = document.getElementById(candle_name);
+    const candle = document.getElementById(candle_name);
+    if (!candle) return;
 
-	for (var i = 0; i < 5; i++) {
-		var flame = candle.querySelector(`.flame`);
-
-		if (flame != null) {
-			flame.remove();
-		}
-	}
+    candle.querySelectorAll(".flame").forEach(flame => flame.remove());
 }
 
 function putOutCandles() {
-	let candles = document.getElementsByClassName("candle");
-	if (candles == null || candles == 'undefined') return;
+    const candles = document.getElementsByClassName("candle");
+    if (!candles || candles.length === 0) return;
 
-	for (var i = 0; i < candles.length; i++) {
-		putOutCandle(document.getElementById(`candle_${i}`));
-	}
+    for (let i = 0; i < candles.length; i++) {
+        putOutCandle(`candle_${i}`);
+    }
 }
+
+// Sayfa yüklendiğinde otomatik başlat
+window.onload = init;
