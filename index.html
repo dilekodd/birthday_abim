@@ -1,44 +1,70 @@
-<!-- Fotoğraflar -->
-<div style="
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  width: 300px;
-">
-  <img src="1.png" alt="Foto 1" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-  <img src="2.png" alt="Foto 2" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-  <img src="3.png" alt="Foto 3" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-  <img src="4.png" alt="Foto 4" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-  <img src="5.png" alt="Foto 5" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-  <img src="6.png" alt="Foto 6" style="
-    width: 90px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  ">
-</div>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="birthday-cake.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+      href="birthday-cake.css"
+    />
+    <title>Birthday Cake</title>
+    <style>
+      .photo-column {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .photo-column img {
+        width: 80px;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .photo-left {
+        left: 60px; /* pastanın solunda */
+      }
+
+      .photo-right {
+        right: 60px; /* pastanın sağında */
+      }
+    </style>
+  </head>
+
+  <body onload="init();">
+    <!-- Sol taraftaki fotoğraflar -->
+    <div class="photo-column photo-left">
+      <img src="1.png" alt="Foto 1" />
+      <img src="2.png" alt="Foto 2" />
+      <img src="3.png" alt="Foto 3" />
+    </div>
+
+    <!-- Pasta -->
+    <div class="cake" onClick="putOutCandles();">
+      <div class="icing">
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+        <div class="drip"></div>
+      </div>
+      <div class="layer top"></div>
+      <div class="layer middle"></div>
+      <div class="layer bottom"></div>
+    </div>
+
+    <!-- Sağ taraftaki fotoğraflar -->
+    <div class="photo-column photo-right">
+      <img src="4.png" alt="Foto 4" />
+      <img src="5.png" alt="Foto 5" />
+      <img src="6.png" alt="Foto 6" />
+    </div>
+
+    <div id="message_container" class="message"></div>
+  </body>
 </html>
