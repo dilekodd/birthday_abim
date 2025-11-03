@@ -1,37 +1,44 @@
-<html>
-    <head>
-        <meta charset = "UTF-8">
-        <script src="birthday-cake.js"></script>
- 		<link rel = "stylesheet" type = "text/css" media = "all" href = "birthday-cake.css"/>
-        <title>Birthday Cake</title>
-    </head>
-    <body onload="init();">
-        <!-- Fotoğraf -->
+<!-- Fotoğraflar -->
 <div style="
-position: absolute;
-top: 50%;
-left: 50px;
-transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 300px;
 ">
-<img src="abim.png" alt="Abim" style="
-  width: 120px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-">
+  <img src="1.png" alt="Foto 1" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
+  <img src="2.png" alt="Foto 2" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
+  <img src="3.png" alt="Foto 3" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
+  <img src="4.png" alt="Foto 4" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
+  <img src="5.png" alt="Foto 5" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
+  <img src="6.png" alt="Foto 6" style="
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  ">
 </div>
-
-        <div class="cake" onClick="putOutCandles();">
-            <div class="icing">
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-                <div class="drip"></div>
-            </div>
-            <div class="layer top"></div>
-            <div class="layer middle"></div>
-            <div class="layer bottom"></div>
-        </div>
-        <div id="message_container" class="message"></div>
-    </body>
 </html>
