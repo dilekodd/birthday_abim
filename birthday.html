@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <script src="birthday-cake.js"></script>
+ 		<link rel = "stylesheet" type = "text/css" media = "all" href = "birthday-cake.css"/>
+        <title>Birthday Cake</title>
+    </head>
+    <body onload="init();">
+        <!-- Fotoğraf -->
+<div style="
+position: absolute;
+top: 50%;
+left: 50px;
+transform: translateY(-50%);
+">
+<img src="abim.png" alt="Abim" style="
+  width: 120px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+">
+</div>
+
+        <div class="cake" onClick="putOutCandles();">
+            <div class="icing">
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
+                <div class="drip"></div>
+            </div>
+            <div class="layer top"></div>
+            <div class="layer middle"></div>
+            <div class="layer bottom"></div>
+        </div>
+        <div id="message_container" class="message"></div>
+    </body>
+</html>
